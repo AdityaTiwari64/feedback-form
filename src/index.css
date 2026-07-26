@@ -865,7 +865,7 @@ button{font-family:inherit;cursor:pointer}
 [data-theme="dark"] .success-title{color:var(--on-dk)}
 .success-body{font-size:0.9375rem;color:var(--ink-soft);line-height:1.7;margin-bottom:var(--s5)}
 [data-theme="dark"] .success-body{color:var(--on-dk-soft)}
-═══════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════ */
 .feedback-page{background:var(--tint);min-height:100vh;padding:var(--s7) 0 var(--s8)}
 [data-theme="dark"] .feedback-page{background:var(--dark-1)}
 
