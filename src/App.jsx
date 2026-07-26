@@ -7,8 +7,15 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 
 function Navbar({ theme, onToggle }) {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <nav className="navbar" data-theme={theme}>
+    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`} data-theme={theme}>
       <div className="navbar-inner">
         <Link to="/" className="navbar-brand">
           <img src="/logo.png" alt="Cisco Community VITB" className="navbar-logo" />

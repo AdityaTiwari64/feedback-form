@@ -85,6 +85,18 @@ button{font-family:inherit;cursor:pointer}
   border-color:rgba(74,58,186,0.10);
   box-shadow:0 4px 24px rgba(74,58,186,0.06);
 }
+.navbar.scrolled{
+  background:var(--dark-1);
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  border-color:rgba(165,156,255,0.20);
+  box-shadow:0 8px 32px rgba(6,4,26,0.50);
+}
+[data-theme="light"] .navbar.scrolled{
+  background:var(--canvas);
+  border-color:rgba(74,58,186,0.15);
+  box-shadow:0 8px 32px rgba(74,58,186,0.10);
+}
 .navbar-inner{
   height:100%;padding:0 8px 0 20px;
   display:flex;align-items:center;gap:var(--s2);
