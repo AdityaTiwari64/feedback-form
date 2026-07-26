@@ -1,16 +1,77 @@
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Home({ theme }) {
   const dk = theme === 'dark';
+  const videoOneRef = useRef(null);
+  const videoTwoRef = useRef(null);
+  const activeVideoRef = useRef(1);
+  const videoFadingRef = useRef(false);
+
+  useEffect(() => {
+    const first = videoOneRef.current;
+    const second = videoTwoRef.current;
+    if (!first || !second) return undefined;
+
+    const videos = [first, second];
+    const setActiveVideo = (activeIndex) => {
+      videos.forEach((video, index) => {
+        video.classList.toggle('is-active', index === activeIndex);
+      });
+    };
+
+    const playSafely = (video) => video.play().catch(() => {
+      // The atmospheric CSS layers remain visible if the browser blocks autoplay.
+    });
+
+    const crossfadeAtLoop = (event) => {
+      const current = event.currentTarget;
+      const currentIndex = current === first ? 0 : 1;
+      const nextIndex = currentIndex === 0 ? 1 : 0;
+      const next = videos[nextIndex];
+      if (videoFadingRef.current || !Number.isFinite(current.duration) || current.currentTime < current.duration - 2) return;
+
+      videoFadingRef.current = true;
+      next.currentTime = 0;
+      playSafely(next);
+      setActiveVideo(nextIndex);
+    };
+
+    const finishLoop = (event) => {
+      const ended = event.currentTarget;
+      const endedIndex = ended === first ? 0 : 1;
+      const nextIndex = endedIndex === 0 ? 1 : 0;
+      ended.currentTime = 0;
+      activeVideoRef.current = nextIndex + 1;
+      videoFadingRef.current = false;
+    };
+
+    setActiveVideo(activeVideoRef.current - 1);
+    playSafely(first);
+    videos.forEach((video) => {
+      video.addEventListener('timeupdate', crossfadeAtLoop);
+      video.addEventListener('ended', finishLoop);
+    });
+
+    return () => videos.forEach((video) => {
+      video.removeEventListener('timeupdate', crossfadeAtLoop);
+      video.removeEventListener('ended', finishLoop);
+    });
+  }, []);
+
   return (
     <>
       {/* ── HERO ─────────────────────────────────────── */}
       <section className="hero">
-        <div className="aurora">
-          <div className="aurora-blob" />
-          <div className="aurora-blob" />
-          <div className="aurora-blob" />
-          <div className="aurora-blob" />
+        <div className="hero-video-stack" aria-hidden="true">
+          <video ref={videoOneRef} className="hero-bg-video is-active" autoPlay muted playsInline preload="auto">
+            <source src="https://strvid.nyc3.cdn.digitaloceanspaces.com/motionsite/blue-light-glow.mp4" type="video/mp4" />
+          </video>
+          <video ref={videoTwoRef} className="hero-bg-video" muted playsInline preload="auto">
+            <source src="https://strvid.nyc3.cdn.digitaloceanspaces.com/motionsite/blue-light-glow.mp4" type="video/mp4" />
+          </video>
+          <div className="hero-video-tint" />
+          <div className="hero-video-fade" />
         </div>
         <div className="hero-content container">
           <h1 className="hero-title">

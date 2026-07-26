@@ -8,6 +8,8 @@ import Contact from './pages/Contact';
 
 function Navbar({ theme, onToggle }) {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
@@ -17,16 +19,16 @@ function Navbar({ theme, onToggle }) {
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`} data-theme={theme}>
       <div className="navbar-inner">
-        <Link to="/" className="navbar-brand">
+        <Link to="/" className="navbar-brand" onClick={() => setMobileMenuOpen(false)}>
           <img src="/logo.png" alt="Cisco Community VITB" className="navbar-logo" />
         </Link>
 
-        <div className="navbar-center">
+        <div className={`navbar-center ${mobileMenuOpen ? 'is-open' : ''}`}>
           <ul className="navbar-links">
-            <li><NavLink to="/" end>Home</NavLink></li>
-            <li><NavLink to="/feedback">Feedback</NavLink></li>
-            <li><NavLink to="/about">About</NavLink></li>
-            <li><NavLink to="/contact">Contact</NavLink></li>
+            <li><NavLink to="/" end onClick={() => setMobileMenuOpen(false)}>Home</NavLink></li>
+            <li><NavLink to="/feedback" onClick={() => setMobileMenuOpen(false)}>Feedback</NavLink></li>
+            <li><NavLink to="/about" onClick={() => setMobileMenuOpen(false)}>About</NavLink></li>
+            <li><NavLink to="/contact" onClick={() => setMobileMenuOpen(false)}>Contact</NavLink></li>
           </ul>
         </div>
 
@@ -38,7 +40,13 @@ function Navbar({ theme, onToggle }) {
               : <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
             }
           </button>
-          <Link to="/feedback" className="nav-cta">Feedback</Link>
+          <Link to="/feedback" className="nav-cta hide-on-mobile">Feedback</Link>
+          <button className="mobile-toggle" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            {mobileMenuOpen 
+              ? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              : <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            }
+          </button>
         </div>
       </div>
     </nav>
