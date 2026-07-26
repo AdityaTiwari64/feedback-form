@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="400" height="200">
+  <defs>
+    <linearGradient id="ciscoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#1B1464"/>
+      <stop offset="45%"  stop-color="#4A3ABA"/>
+      <stop offset="100%" stop-color="#7B6FF0"/>
+    </linearGradient>
+    <linearGradient id="barsGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#4A3ABA"/>
+      <stop offset="100%" stop-color="#A59CFF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Signal bars (Cisco-style, centered at x=200) -->
+  <!-- Bar 1 (leftmost, short) -->
+  <rect x="146" y="26" width="7" height="20" rx="3.5" fill="url(#barsGrad)"/>
+  <!-- Bar 2 -->
+  <rect x="159" y="18" width="7" height="28" rx="3.5" fill="url(#barsGrad)"/>
+  <!-- Bar 3 -->
+  <rect x="172" y="10" width="7" height="36" rx="3.5" fill="url(#barsGrad)"/>
+  <!-- Bar 4 (tallest, center) -->
+  <rect x="185" y="4"  width="7" height="42" rx="3.5" fill="url(#barsGrad)"/>
+  <!-- Bar 5 (center-right) -->
+  <rect x="208" y="4"  width="7" height="42" rx="3.5" fill="url(#barsGrad)"/>
+  <!-- Bar 6 -->
+  <rect x="221" y="10" width="7" height="36" rx="3.5" fill="url(#barsGrad)"/>
+  <!-- Bar 7 -->
+  <rect x="234" y="18" width="7" height="28" rx="3.5" fill="url(#barsGrad)"/>
+  <!-- Bar 8 (rightmost, short) -->
+  <rect x="247" y="26" width="7" height="20" rx="3.5" fill="url(#barsGrad)"/>
+
+  <!-- "Cisco" text -->
+  <text
+    x="200"
+    y="130"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="72"
+    font-weight="700"
+    text-anchor="middle"
+    fill="url(#ciscoGrad)"
+    letter-spacing="-1"
+  >Cisco</text>
+
+  <!-- Decorative lines + "COMMUNITY VITB" -->
+  <!-- Left line -->
+  <line x1="40" y1="157" x2="112" y2="157" stroke="url(#barsGrad)" stroke-width="1.2"/>
+  <!-- Left arrow tip -->
+  <polygon points="112,157 106,153 106,161" fill="url(#barsGrad)"/>
+
+  <!-- COMMUNITY VITB text -->
+  <text
+    x="200"
+    y="162"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="13"
+    font-weight="400"
+    text-anchor="middle"
+    fill="url(#barsGrad)"
+    letter-spacing="5"
+  >COMMUNITY VITB</text>
+
+  <!-- Right arrow tip -->
+  <polygon points="288,157 294,153 294,161" fill="url(#barsGrad)"/>
+  <!-- Right line -->
+  <line x1="288" y1="157" x2="360" y2="157" stroke="url(#barsGrad)" stroke-width="1.2"/>
+</svg>
